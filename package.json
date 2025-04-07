@@ -1,0 +1,40 @@
+{
+  "name": "blog-project",
+  "version": "1.0.0",
+  "description": "A simple blog project using NestJS and PostgreSQL.",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "nest build",
+    "start": "node dist/main.js",
+    "start:prod": "node dist/main.js",
+    "start:dev": "nest start --watch",
+    "watch": "tsc -w",
+    "test": "jest"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@nestjs/cli": "10",
+    "@nestjs/common": "^10.4.15",
+    "@nestjs/core": "^10.4.15",
+    "@nestjs/mapped-types": "^2.1.0",
+    "@nestjs/platform-express": "^10.4.15",
+    "@nestjs/typeorm": "^9.0.0",
+    "class-transformer": "^0.4.1",
+    "class-validator": "^0.13.2",
+    "pg": "^8.14.1",
+    "sqlite3": "^5.1.7",
+    "typeorm": "^0.2.45"
+  },
+  "devDependencies": {
+    "@nestjs/testing": "^10.4.15",
+    "@types/jest": "^27.0.2",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.6",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.4"
+  },
+  "license": "MIT",
+  "packageManager": "pnpm@9.4.0+sha512.f549b8a52c9d2b8536762f99c0722205efc5af913e77835dbccc3b0b0b2ca9e7dc8022b78062c17291c48e88749c70ce88eb5a74f1fa8c4bf5e18bb46c8bd83a"
+}
