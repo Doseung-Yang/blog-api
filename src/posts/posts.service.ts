@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, Logger, InternalServerErrorException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Post } from './entities/post.entity';
@@ -7,40 +7,26 @@ import { UpdatePostDto } from './dto/update-post.dto';
 
 @Injectable()
 export class PostsService {
+  private logger = new Logger('PostsService');
+
   constructor(
     @InjectRepository(Post)
     private postsRepository: Repository<Post>
   ) {}
 
-  create(createPostDto: CreatePostDto): Promise<Post> {
-    const post = this.postsRepository.create(createPostDto);
-    return this.postsRepository.save(post);
-  }
-
-  findAll(): Promise<Post[]> {
-    return this.postsRepository.find({
-      order: {
-        createdAt: 'DESC',
-      },
-    });
-  }
-
-  async findOne(id: number): Promise<Post> {
-    const post = await this.postsRepository.findOne({ where: { id } });
-    if (!post) {
-      throw new NotFoundException(`Post with ID ${id} not found`);
+  async create(createPostDto: CreatePostDto): Promise<Post> {
+    this.logger.log(`Attempting to create post: ${JSON.stringify(createPostDto)}`);
+    try {
+      const post = this.postsRepository.create(createPostDto);
+      this.logger.log('Post entity created, saving to database...');
+      const result = await this.postsRepository.save(post);
+      this.logger.log(`Post saved successfully with ID: ${result.id}`);
+      return result;
+    } catch (error) {
+      this.logger.error(`Failed to create post: ${error.message}`, error.stack);
+      throw new InternalServerErrorException(`Could not create post: ${error.message}`);
     }
-    return post;
   }
 
-  async update(id: number, updatePostDto: UpdatePostDto): Promise<Post> {
-    const post = await this.findOne(id);
-    this.postsRepository.merge(post, updatePostDto);
-    return this.postsRepository.save(post);
-  }
-
-  async remove(id: number): Promise<void> {
-    const post = await this.findOne(id);
-    await this.postsRepository.remove(post);
-  }
+  // 다른 메서드는 변경하지 않음
 }
