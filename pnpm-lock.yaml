@@ -35,9 +35,6 @@ importers:
       pg:
         specifier: ^8.14.1
         version: 8.14.1
-      sqlite3:
-        specifier: ^5.1.7
-        version: 5.1.7
       typeorm:
         specifier: ^0.2.45
         version: 0.2.45(pg@8.14.1)(sqlite3@5.1.7)
@@ -48,9 +45,15 @@ importers:
       '@types/jest':
         specifier: ^27.0.2
         version: 27.5.2
+      '@types/node':
+        specifier: ^22.14.0
+        version: 22.14.0
       jest:
         specifier: ^27.0.6
         version: 27.5.1
+      sqlite3:
+        specifier: ^5.1.7
+        version: 5.1.7
       ts-jest:
         specifier: ^27.0.6
         version: 27.1.5(@babel/core@7.26.10)(@types/jest@27.5.2)(babel-jest@27.5.1(@babel/core@7.26.10))(jest@27.5.1)(typescript@4.9.5)
