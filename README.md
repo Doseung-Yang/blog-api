@@ -1,15 +1,8 @@
-# Blog Project
+# Blog API Project
+블로그 브로젝트 api를 위해서 개발 하였습니다.
+Render를 통해서 서버 호스팅을 하고 있으며, nest로 개발하고 있습니다. 
 
-This is a simple blog project built with NestJS and PostgreSQL. The project includes features for creating, updating, and managing blog posts and comments.
-
-## Features
-
-- **Blog Posts**: Create, update, and retrieve blog posts.
-- **Comments**: Add comments to blog posts.
-- **User Management**: Manage users who can create and comment on posts.
-- **Date Handling**: Automatically record the creation date of posts.
-
-## Project Structure
+## 프로젝트 구조
 
 ```
 blog-project
@@ -69,13 +62,7 @@ blog-project
 └── README.md
 ```
 
-## Getting Started
-
-1. Clone the repository.
-2. Install dependencies using `npm install`.
-3. Set up your PostgreSQL database and update the `.env` file with your database credentials.
-4. Run the application using `npm run start`.
-
+개선  ~ ing
 ## License
 
 This project is licensed under the MIT License.
