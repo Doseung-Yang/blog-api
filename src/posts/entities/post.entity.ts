@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany } from 'typeorm';
 import { Comment } from '../../comments/entities/comment.entity';
 
-@Entity()
+@Entity('posts')
 export class Post {
   @PrimaryGeneratedColumn()
   id!: number;
@@ -15,7 +15,6 @@ export class Post {
   @Column({ default: 'anonymous' })
   author!: string;
 
-  // 댓글과의 관계 추가
   @OneToMany(() => Comment, comment => comment.post)
   comments!: Comment[];
 
