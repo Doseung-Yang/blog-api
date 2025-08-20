@@ -40,7 +40,6 @@
     "class-validator": "^0.14.0",
     "jest": "^27.0.6",
     "pg": "^8.14.1",
-    "sqlite3": "^5.1.7",
     "ts-jest": "^27.0.6",
     "ts-loader": "^9.2.6",
     "typeorm": "^0.2.45",
