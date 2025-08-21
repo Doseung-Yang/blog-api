@@ -5,6 +5,7 @@ import { Comment } from './entities/comment.entity';
 import { CreateCommentDto } from './dto/create-comment.dto';
 import { UpdateCommentDto } from './dto/update-comment.dto';
 import { Post } from '../posts/entities/post.entity';
+import { CreateCommentForPostDto } from './dto/create-comment-post.dto';
 
 @Injectable()
 export class CommentsService {
@@ -14,6 +15,27 @@ export class CommentsService {
     @InjectRepository(Post)
     private postsRepository: Repository<Post>
   ) {}
+  async findByPost(postId: number): Promise<Comment[]> {
+    return this.commentsRepository
+      .createQueryBuilder('comment')
+      .leftJoinAndSelect('comment.post', 'post')
+      .where('post.id = :postId', { postId })
+      .orderBy('comment.createdAt', 'DESC')
+      .getMany();
+  }
+
+  async createForPost(postId: number, dto: CreateCommentForPostDto): Promise<Comment> {
+    const post = await this.postsRepository.findOne({ where: { id: postId } });
+    if (!post) {
+      throw new NotFoundException(`Post with ID ${postId} not found`);
+    }
+    const comment = this.commentsRepository.create({
+      content: dto.content,
+      author: dto.author ?? 'anonymous',
+      post,
+    });
+    return this.commentsRepository.save(comment);
+  }
 
   async create(createCommentDto: CreateCommentDto): Promise<Comment> {
     const { postId, ...commentData } = createCommentDto;
