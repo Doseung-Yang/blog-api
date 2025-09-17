@@ -12,7 +12,11 @@ export class Post {
   @Column('text')
   content!: string;
 
-  @Column({ default: 'anonymous' })
+  @Column({
+    type: 'varchar',
+    length: 15,
+    default: 'anonymous',
+  })
   author!: string;
 
   @OneToMany(() => Comment, comment => comment.post)
